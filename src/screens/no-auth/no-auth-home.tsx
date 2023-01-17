@@ -5,12 +5,13 @@ import UiButton from '../../components/inputs/ui-button';
 import AppLayout from '../../components/layout/app-layput';
 import Card from '../../components/layout/card';
 import UiText from '../../components/typography/generic-text';
+import H2 from '../../components/typography/h2';
 import { useStore } from '../../store/useStore';
 
 const NoAuthHome: React.FC = observer(() => {
   const randomTrip = useStore('randomTrip');
 
-  console.log(randomTrip.stops);
+  console.log(randomTrip.loaded);
 
   useEffect(() => {
     randomTrip.getRandomTrip();
@@ -27,7 +28,12 @@ const NoAuthHome: React.FC = observer(() => {
         <UiButton href="Register">Register</UiButton>
       </Card>
       <Card>
-        <UiText>fdfd</UiText>
+        {(randomTrip.pending || randomTrip.loading) && (
+          <UiText>Loading data...</UiText>
+        )}
+        {randomTrip.loaded && (
+          <H2>{randomTrip.allActiveTrips} активни пътувания в момента</H2>
+        )}
       </Card>
     </AppLayout>
   );

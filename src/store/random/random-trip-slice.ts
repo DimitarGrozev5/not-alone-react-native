@@ -97,6 +97,7 @@ export const createRandomTripStore = (): RandomTripStore => {
             store._stops.set(data.stops);
             store._watchers.set(data.watchers);
             store._tripStatus.set(data.tripStatus);
+            store.setLoaded(true);
           });
         } catch (error) {
           console.log(error);

@@ -10,7 +10,7 @@ type Props = {
   children: React.ComponentProps<typeof Text>['children'];
   variant?: 'rock' | 'forest' | 'lake';
   center?: boolean;
-  style?: TextStyle;
+  style?: TextStyle | TextStyle[];
 };
 
 const UiText: React.FC<Props> = ({
@@ -27,7 +27,7 @@ const UiText: React.FC<Props> = ({
         toggle(variant === 'lake', styles.lakeColor),
         toggle(center, styles.centered),
         style,
-      ]}
+      ].flatMap((s) => s)}
     >
       {children}
     </Text>
