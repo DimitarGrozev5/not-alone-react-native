@@ -53,7 +53,7 @@ const StopsMonitor: React.FC<Props> = ({
         </>
       ))}
 
-      <View style={[styles.stopContainer]}>{children}</View>
+      <View style={[styles.stopContainer, styles.currentStop]}>{children}</View>
 
       {stops.slice(nextStop).map((stop, index) => (
         <>
@@ -103,5 +103,8 @@ const styles = StyleSheet.create({
   spacer: { paddingLeft: 11, paddingVertical: 4 },
   placeNameOnly: {
     fontSize: 20,
+  },
+  currentStop: {
+    marginLeft: 30,
   },
 });
