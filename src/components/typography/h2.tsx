@@ -15,7 +15,7 @@ const H2: React.FC<Props> = ({
   style = {},
 }) => {
   return (
-    <UiText center={center} variant={variant} style={[styles.h2, style]}>
+    <UiText center={center} bold variant={variant} style={[styles.h2, style]}>
       {children}
     </UiText>
   );

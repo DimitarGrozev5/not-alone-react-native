@@ -10,6 +10,7 @@ type Props = {
   children: React.ComponentProps<typeof Text>['children'];
   variant?: 'rock' | 'forest' | 'lake';
   center?: boolean;
+  bold?: boolean;
   style?: TextStyle | TextStyle[];
 };
 
@@ -18,6 +19,7 @@ const UiText: React.FC<Props> = ({
   center = false,
   variant = 'rock',
   style = {},
+  bold = false,
 }) => {
   return (
     <Text
@@ -26,6 +28,7 @@ const UiText: React.FC<Props> = ({
         toggle(variant === 'forest', styles.forestColor),
         toggle(variant === 'lake', styles.lakeColor),
         toggle(center, styles.centered),
+        toggle(bold, styles.bold),
         style,
       ].flatMap((s) => s)}
     >
@@ -38,7 +41,7 @@ export default UiText;
 
 const styles = StyleSheet.create({
   rockColor: {
-    color: LightColorsRock.A900,
+    color: LightColorsRock.A800,
   },
   forestColor: {
     color: LightColorsForest.A900,
@@ -48,5 +51,8 @@ const styles = StyleSheet.create({
   },
   centered: {
     textAlign: 'center',
+  },
+  bold: {
+    fontWeight: 'bold',
   },
 });
