@@ -1,11 +1,11 @@
 import { observable, runInAction } from 'mobx';
 import { fetchData } from '../../data-fetching/fetch-data';
-import { TripStatus } from '../../models/Trip';
+import { TripStatus, TripStatuses } from '../../models/Trip';
 import { LoadingState } from '../slice-types';
 
-type RandomTripStop = {
+export type RandomTripStop = {
   _id: string;
-  data: { _id: string; placeName: string };
+  data: { _id: string; placeName: string; placeDescription?: string };
   stopModel: string;
   duration: number;
 };
@@ -28,7 +28,7 @@ export const createRandomTripStore = (): RandomTripStore => {
     name: '',
     stops: [],
     watchers: 0,
-    tripStatus: 'PENDING',
+    tripStatus: { status: 'PENDING', nextStop: 0, dueBy: 0 },
   };
 
   const store = {

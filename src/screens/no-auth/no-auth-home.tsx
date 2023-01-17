@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect } from 'react';
 import { Text } from 'react-native';
+import StopsMonitor from '../../components/common/StopsMonitor';
 import UiButton from '../../components/inputs/ui-button';
 import AppLayout from '../../components/layout/app-layput';
 import Card from '../../components/layout/card';
@@ -35,6 +36,12 @@ const NoAuthHome: React.FC = observer(() => {
           <>
             <H2>{randomTrip.allActiveTrips} активни пътувания в момента</H2>
             <H3 center={false}>Ето едно от тях:</H3>
+            <StopsMonitor
+              stops={randomTrip.stops}
+              nextStop={randomTrip.tripStatus.nextStop}
+            >
+              <UiText>rere</UiText>
+            </StopsMonitor>
           </>
         )}
       </Card>
