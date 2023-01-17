@@ -11,7 +11,7 @@ const AppLayout: React.FC<Props> = ({ children }) => {
         resizeMode="cover"
         style={styles.container}
       >
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
         {children}
       </ImageBackground>
     </View>

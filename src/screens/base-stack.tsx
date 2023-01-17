@@ -1,4 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  LightColorsForest,
+  LightColorsLake,
+  LightColorsRock,
+} from '../styling/colors';
 import HomeBottomNavigation from './auth/auth-bottom-navigation';
 import Login from './no-auth/login';
 import NoAuthHome from './no-auth/no-auth-home';
@@ -9,12 +14,30 @@ const Stack = createNativeStackNavigator();
 const BaseStack = () => {
   const isAuth = false;
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: LightColorsRock.A900,
+        },
+        headerTintColor: LightColorsLake.A100,
+      }}
+    >
       {isAuth ? (
-        <Stack.Screen name="AuthHome" component={HomeBottomNavigation} />
+        <Stack.Screen
+          name="AuthHome"
+          component={HomeBottomNavigation}
+          options={{
+            title: 'Travel Safe',
+            headerShown: false,
+          }}
+        />
       ) : (
         <>
-          <Stack.Screen name="NoAuthHome" component={NoAuthHome} />
+          <Stack.Screen
+            name="NoAuthHome"
+            component={NoAuthHome}
+            options={{ title: 'Travel Safe' }}
+          />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
         </>
