@@ -6,6 +6,7 @@ import AppLayout from '../../components/layout/app-layput';
 import Card from '../../components/layout/card';
 import UiText from '../../components/typography/generic-text';
 import H2 from '../../components/typography/h2';
+import H3 from '../../components/typography/h3';
 import { useStore } from '../../store/useStore';
 
 const NoAuthHome: React.FC = observer(() => {
@@ -20,9 +21,8 @@ const NoAuthHome: React.FC = observer(() => {
   return (
     <AppLayout>
       <Card>
-        <UiText center>
-          To take full advantige of this service, you have to log in
-        </UiText>
+        <H3>To take full advantige of this service</H3>
+        <H3>you have to log in</H3>
         <UiButton href="Login">Login</UiButton>
         <UiText center>or</UiText>
         <UiButton href="Register">Register</UiButton>
@@ -32,7 +32,10 @@ const NoAuthHome: React.FC = observer(() => {
           <UiText>Loading data...</UiText>
         )}
         {randomTrip.loaded && (
-          <H2>{randomTrip.allActiveTrips} активни пътувания в момента</H2>
+          <>
+            <H2>{randomTrip.allActiveTrips} активни пътувания в момента</H2>
+            <H3 center={false}>Ето едно от тях:</H3>
+          </>
         )}
       </Card>
     </AppLayout>

@@ -1,6 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, View, Text, StyleSheet, ViewStyle } from 'react-native';
-import { LightColorsForest, LightColorsRock } from '../../styling/colors';
+import {
+  LightColorsForest,
+  LightColorsLake,
+  LightColorsRock,
+} from '../../styling/colors';
 
 type Props = {
   children: string;
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
-    color: LightColorsRock.A700,
+    color: LightColorsLake.A500,
     fontWeight: 'bold',
   },
 });
