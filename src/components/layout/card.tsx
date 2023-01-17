@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     backgroundColor: alpha(LightColorsForest.A50, 0.8),
     paddingHorizontal: 16,
     paddingVertical: 8,
+    marginBottom: 8,
     borderRadius: 2,
   },
 });

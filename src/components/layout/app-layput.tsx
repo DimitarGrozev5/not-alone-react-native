@@ -7,7 +7,7 @@ const AppLayout: React.FC<Props> = ({ children }) => {
   return (
     <View style={styles.rootView}>
       <ImageBackground
-        source={require('../../assets/bgImage.jpg')}
+        source={require('../../../assets/bgImage.jpg')}
         resizeMode="cover"
         style={[styles.rootView, styles.container]}
       >
