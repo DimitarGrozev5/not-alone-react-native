@@ -1,6 +1,6 @@
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import { alpha } from '../styling/alpha';
-import { LightColorsForest, LightColorsRock } from '../styling/colors';
+import { alpha } from '../../styling/alpha';
+import { LightColorsForest, LightColorsRock } from '../../styling/colors';
 
 type Props = React.PropsWithChildren & {
   style?: ViewStyle;

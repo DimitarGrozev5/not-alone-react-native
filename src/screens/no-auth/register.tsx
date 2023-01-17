@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import AppLayout from '../../layout/app-layput';
+import AppLayout from '../../components/layout/app-layput';
 
 const Register: React.FC = () => {
   return (

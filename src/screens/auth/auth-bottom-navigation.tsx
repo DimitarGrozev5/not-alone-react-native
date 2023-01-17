@@ -5,8 +5,9 @@ import Active from './active';
 import Planned from './planned';
 import Profile from './profile';
 import Watched from './watched';
+import { AuthBottomNavigationParamList } from './auth-bottom-navigation.types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<AuthBottomNavigationParamList>();
 
 const HomeBottomNavigation: React.FC = () => {
   return (

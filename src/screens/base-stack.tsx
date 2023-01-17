@@ -5,11 +5,12 @@ import {
   LightColorsRock,
 } from '../styling/colors';
 import HomeBottomNavigation from './auth/auth-bottom-navigation';
+import { BaseStackParamList } from './base-stack.types';
 import Login from './no-auth/login';
 import NoAuthHome from './no-auth/no-auth-home';
 import Register from './no-auth/register';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<BaseStackParamList>();
 
 const BaseStack = () => {
   const isAuth = false;
