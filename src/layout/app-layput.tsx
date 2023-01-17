@@ -5,11 +5,11 @@ type Props = React.PropsWithChildren;
 
 const AppLayout: React.FC<Props> = ({ children }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.rootView}>
       <ImageBackground
         source={require('../../assets/bgImage.jpg')}
         resizeMode="cover"
-        style={styles.container}
+        style={[styles.rootView, styles.container]}
       >
         <StatusBar style="light" />
         {children}
@@ -21,12 +21,15 @@ const AppLayout: React.FC<Props> = ({ children }) => {
 export default AppLayout;
 
 const styles = StyleSheet.create({
-  container: {
+  rootView: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+  },
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     alignSelf: 'stretch',
-    zIndex: -1,
   },
 });
