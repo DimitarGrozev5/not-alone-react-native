@@ -1,7 +1,12 @@
 import { Text } from 'react-native';
+import AppLayout from '../../layout/app-layput';
 
 const Login: React.FC = () => {
-  return <Text>Login</Text>;
+  return (
+    <AppLayout>
+      <Text>Login</Text>
+    </AppLayout>
+  );
 };
 
 export default Login;

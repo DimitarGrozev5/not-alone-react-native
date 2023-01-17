@@ -1,7 +1,12 @@
 import { Text } from 'react-native';
+import AppLayout from '../../layout/app-layput';
 
 const Register: React.FC = () => {
-  return <Text>Register</Text>;
+  return (
+    <AppLayout>
+      <Text>Register</Text>
+    </AppLayout>
+  );
 };
 
 export default Register;

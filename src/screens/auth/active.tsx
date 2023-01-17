@@ -1,7 +1,12 @@
 import { Text } from 'react-native';
+import AppLayout from '../../layout/app-layput';
 
 const Active: React.FC = () => {
-  return <Text>Active</Text>;
+  return (
+    <AppLayout>
+      <Text>Active</Text>
+    </AppLayout>
+  );
 };
 
 export default Active;

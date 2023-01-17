@@ -7,7 +7,7 @@ import Register from './no-auth/register';
 const Stack = createNativeStackNavigator();
 
 const BaseStack = () => {
-  const isAuth = true;
+  const isAuth = false;
   return (
     <Stack.Navigator>
       {isAuth ? (
