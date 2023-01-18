@@ -56,22 +56,26 @@ const NoAuthHome: React.FC = observer(() => {
             >
               {randomTrip.tripStatus.status === 'ONGOING' && (
                 <>
-                  <UiText>
+                  <H3 center={false}>
                     Потребителят се очаква да пристигне до {timeLeft}
-                  </UiText>
+                  </H3>
                 </>
               )}
               {randomTrip.tripStatus.status === 'PAUSED' && (
                 <>
-                  <UiText>Потребителят е в почивка</UiText>
+                  <H3 center={false}>Потребителят е в почивка</H3>
                 </>
               )}
               {(randomTrip.tripStatus.status === 'LATE' ||
                 randomTrip.tripStatus.status === 'VERY_LATE') && (
-                <UiText>Потребителят закъснява с {timeLeft}.</UiText>
+                <H3 center={false}>
+                  Потребителят закъснява с <UiText variant='forest'>{timeLeft}</UiText>.
+                </H3>
               )}
               {randomTrip.tripStatus.status === 'FINISHED' && (
-                <UiText>Потребителят стигна до крайната си дестинация</UiText>
+                <H3 center={false}>
+                  Потребителят стигна до крайната си дестинация
+                </H3>
               )}
             </StopsMonitor>
           </>
