@@ -4,10 +4,15 @@ import { LightColorsForest, LightColorsRock } from '../../styling/colors';
 
 type Props = React.PropsWithChildren & {
   style?: ViewStyle;
+  flex?: number;
 };
 
-const Card: React.FC<Props> = ({ children, style = {} }) => {
-  return <View style={[styles.cardContainer, style]}>{children}</View>;
+const Card: React.FC<Props> = ({ children, style = {}, flex }) => {
+  return (
+    <View style={[styles.cardContainer, style, !!flex ? { flex } : {}]}>
+      {children}
+    </View>
+  );
 };
 
 export default Card;

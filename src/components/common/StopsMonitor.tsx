@@ -35,7 +35,7 @@ const StopsMonitor: React.FC<Props> = ({
             <View>
               {showDesc ? (
                 <>
-                  <H3>{stop.data.placeName}</H3>
+                  <H3 center>{stop.data.placeName}</H3>
                   <UiText>{stop.data.placeDescription}</UiText>
                 </>
               ) : (
@@ -77,7 +77,7 @@ const StopsMonitor: React.FC<Props> = ({
             <View>
               {showDesc ? (
                 <>
-                  <H3>{stop.data.placeName}</H3>
+                  <H3 center>{stop.data.placeName}</H3>
                   <UiText>{stop.data.placeDescription}</UiText>
                 </>
               ) : (

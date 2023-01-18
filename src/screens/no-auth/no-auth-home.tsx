@@ -33,8 +33,8 @@ const NoAuthHome: React.FC = observer(() => {
   return (
     <AppLayout>
       <Card>
-        <H3>To take full advantige of this service</H3>
-        <H3>you have to log in</H3>
+        <H3 center>To take full advantige of this service</H3>
+        <H3 center>you have to log in</H3>
         <UiButton href="Login">Login</UiButton>
         <UiText center>or</UiText>
         <UiButton href="Register">Register</UiButton>
@@ -45,8 +45,8 @@ const NoAuthHome: React.FC = observer(() => {
         )}
         {randomTrip.loaded && (
           <>
-            <H2>{randomTrip.allActiveTrips} active trips</H2>
-            <H3 center={false}>Here is a random one:</H3>
+            <H2 center>{randomTrip.allActiveTrips} active trips</H2>
+            <H3>Here is a random one:</H3>
 
             <StopsMonitor
               stops={randomTrip.stops}
@@ -54,27 +54,25 @@ const NoAuthHome: React.FC = observer(() => {
             >
               {randomTrip.tripStatus.status === 'ONGOING' && (
                 <>
-                  <H3 center={false}>
-                    The user is expected to get there in {timeLeft}
-                  </H3>
+                  <H3>The user is expected to get there in {timeLeft}</H3>
                 </>
               )}
               {randomTrip.tripStatus.status === 'PAUSED' && (
                 <>
-                  <H3 center={false}>The user has Paused the trip</H3>
+                  <H3>The user has Paused the trip</H3>
                 </>
               )}
               {(randomTrip.tripStatus.status === 'LATE' ||
                 randomTrip.tripStatus.status === 'VERY_LATE') && (
-                <H3 center={false}>
+                <H3>
                   The user is <UiText variant="forest">{timeLeft}</UiText> late.
                 </H3>
               )}
               {randomTrip.tripStatus.status === 'FINISHED' && (
-                <H3 center={false}>The user has arrived</H3>
+                <H3>The user has arrived</H3>
               )}
             </StopsMonitor>
-            <H3 variant="forest" center={false}>
+            <H3 variant="forest" center>
               {randomTrip.watchers}{' '}
               {randomTrip.watchers === 1 ? 'person is' : 'people are'} watching
               him, making sure he gets there safe

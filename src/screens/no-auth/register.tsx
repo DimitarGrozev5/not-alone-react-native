@@ -45,7 +45,7 @@ const Register: React.FC = observer(() => {
   return (
     <AppLayout>
       <Card>
-        <H2>Register a new account</H2>
+        <H2 center>Register a new account</H2>
         <Spacer />
         <Controller
           control={control}

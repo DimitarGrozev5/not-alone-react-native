@@ -11,7 +11,7 @@ type Props = {
 
 const H2: React.FC<Props> = ({
   children,
-  center = true,
+  center = false,
   variant = 'rock',
   bold = true,
   style = {},

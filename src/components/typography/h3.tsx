@@ -10,7 +10,7 @@ type Props = {
 
 const H3: React.FC<Props> = ({
   children,
-  center = true,
+  center = false,
   variant = 'rock',
   style = {},
 }) => {

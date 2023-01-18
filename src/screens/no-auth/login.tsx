@@ -23,7 +23,7 @@ const Login: React.FC = observer(() => {
   return (
     <AppLayout>
       <Card>
-        <H2>Login to your account</H2>
+        <H2 center>Login to your account</H2>
         <Spacer />
 
         <UiTextInput label="Email" value={email} onChangeText={setEmail} />

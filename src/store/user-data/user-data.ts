@@ -14,7 +14,16 @@ interface UserOverview {
   phone: string;
 }
 
-interface UserData extends UserOverview {}
+export interface Connection {
+  id: string;
+  name: string;
+  phone: string;
+}
+interface UserConnections {
+  connections: Connection[];
+}
+
+interface UserData extends UserOverview, UserConnections {}
 
 export interface UserDataStore
   extends UserData,
@@ -33,7 +42,7 @@ export const createUserDataStore = (): UserDataStore => {
     email: '',
     name: '',
     phone: '',
-    // connections: [],
+    connections: [],
   };
 
   const store = {
@@ -111,6 +120,10 @@ export const createUserDataStore = (): UserDataStore => {
     _phone: observable.box<string>(initUserData.phone),
     get phone() {
       return store._phone.get();
+    },
+    _connections: observable.box<Connection[]>(initUserData.connections),
+    get connections() {
+      return store._connections.get();
     },
 
     async login(loginData: LoginData) {
@@ -201,14 +214,14 @@ export const createUserDataStore = (): UserDataStore => {
         store.setLoading(false);
       }
     },
+
     async getUserData() {
       try {
         runInAction(() => {
           store.setPending(false);
           store.setLoading(true);
         });
-        console.log('in');
-        
+
         const data = await fetchData<GetUserReturnType>(
           `/users/${store._userId.get()}`,
           {
@@ -220,6 +233,7 @@ export const createUserDataStore = (): UserDataStore => {
           store._email.set(data.userData.email);
           store._name.set(data.userData.name);
           store._phone.set(data.userData.phone);
+          store._connections.set([...data.connections]);
         });
       } catch (error) {
         console.log(error);
