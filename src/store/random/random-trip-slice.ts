@@ -1,7 +1,7 @@
 import { observable, runInAction } from 'mobx';
 import { fetchData } from '../../data-fetching/fetch-data';
 import { TripStatus, TripStatuses } from '../../models/Trip';
-import { LoadingState } from '../slice-types';
+import { DataLoadingState } from '../slice-types';
 
 export type RandomTripStop = {
   _id: string;
@@ -18,7 +18,7 @@ interface RandomTrip {
   tripStatus: TripStatus;
 }
 
-export interface RandomTripStore extends RandomTrip, LoadingState {
+export interface RandomTripStore extends RandomTrip, DataLoadingState {
   getRandomTrip: () => void;
 }
 
@@ -37,28 +37,28 @@ export const createRandomTripStore = (): RandomTripStore => {
       return store._pending.get();
     },
     setPending(value: boolean) {
-      store._pending.set(value);
+      runInAction(() => store._pending.set(value));
     },
     _loading: observable.box<boolean>(false),
     get loading() {
       return store._loading.get();
     },
     setLoading(value: boolean) {
-      store._loading.set(value);
+      runInAction(() => store._loading.set(value));
     },
     _loaded: observable.box<boolean>(false),
     get loaded() {
       return store._loaded.get();
     },
     setLoaded(value: boolean) {
-      store._loaded.set(value);
+      runInAction(() => store._loaded.set(value));
     },
     _error: observable.box<null | string>(null),
     get error() {
       return store._error.get();
     },
     setError(value: null | string) {
-      store._error.set(value);
+      runInAction(() => store._error.set(value));
     },
 
     _allActiveTrips: observable.box<number>(initRandomTrip.allActiveTrips),

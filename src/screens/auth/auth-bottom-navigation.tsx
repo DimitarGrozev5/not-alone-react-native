@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator<AuthBottomNavigationParamList>();
 const HomeBottomNavigation: React.FC = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Profile"
       screenOptions={{
         headerStyle: {
           backgroundColor: LightColorsRock.A900,

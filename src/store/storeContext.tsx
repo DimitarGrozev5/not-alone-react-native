@@ -14,24 +14,19 @@ export function StoreProvider({
 }: React.PropsWithChildren): JSX.Element {
   const store = useLocalObservable(createStore);
 
-  // Get data from local storage
   (async () => {
+    // Get auth token from secure storage
     const token = await SecureStore.getItemAsync('token');
-    store.userData.setToken(token || '');
+    const userId = await SecureStore.getItemAsync('userId');
+    store.setAuth(userId || '', token || '');
   })();
 
-  // Save store to local storage after every change
-  // autorun(async () => {
-  //   try {
-  //     const db = dbStoreToData(store.db);
-
-  //     const jsonDB = JSON.stringify(db);
-
-  //     // console.log(jsonDB);
-
-  //     await AsyncStorage.setItem('db-data', jsonDB);
-  //   } catch (err) {}
-  // });
+  // Update all auth data across the store
+  autorun(async () => {
+    const userId = store.userData.userId;
+    const token = store.userData.token;
+    store.setAuth(userId, token);
+  });
 
   return (
     <storeContext.Provider value={store}>{children}</storeContext.Provider>

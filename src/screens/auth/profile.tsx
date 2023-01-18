@@ -1,10 +1,23 @@
-import { Text } from 'react-native';
+import React, { useEffect } from 'react';
+import ProfileOverview from '../../components/for-pages/profile/profile-overview';
+import UiButton from '../../components/inputs/ui-button';
 import AppLayout from '../../components/layout/app-layput';
+import Card from '../../components/layout/card';
+import { useStore } from '../../store/useStore';
 
 const Profile: React.FC = () => {
+  const getUserStore = useStore('userData').getUserData;
+  const logout = useStore('userData').logout;
+
+  useEffect(() => {
+    getUserStore();
+  }, []);
   return (
     <AppLayout>
-      <Text>Profile</Text>
+      <ProfileOverview />
+      <Card>
+        <UiButton onPress={logout}>Logout</UiButton>
+      </Card>
     </AppLayout>
   );
 };

@@ -1,93 +1,134 @@
 import { observable, runInAction } from 'mobx';
 import { fetchData } from '../../data-fetching/fetch-data';
 import * as SecureStore from 'expo-secure-store';
-import { LoadingState } from '../slice-types';
+import {
+  ActionLoadingState,
+  AuthState,
+  DataLoadingState,
+} from '../slice-types';
+import { LoginData, RegisterData } from './user-data-body-types';
 
-interface UserData {
-  token: string;
-  // email: string;
-  // name: string;
-  // phone: string;
-  // connections: string[];
-}
-
-interface LoginData {
-  email: string;
-  password: string;
-}
-
-interface RegisterData {
+interface UserOverview {
   email: string;
   name: string;
   phone: string;
-  password: string;
 }
 
-export interface UserDataStore extends UserData, LoadingState {
-  setToken: (token: string) => void;
+interface UserData extends UserOverview {}
+
+export interface UserDataStore
+  extends UserData,
+    AuthState,
+    DataLoadingState,
+    ActionLoadingState {
   login: (loginData: LoginData) => void;
   register: (registerData: RegisterData) => void;
-  // getUserData: (email: string, name: string, phone: string) => void;
+  logout: () => void;
+  getUserData: () => void;
   // getConnections: (connections: string[]) => void;
 }
 
 export const createUserDataStore = (): UserDataStore => {
   const initUserData: UserData = {
-    token: '',
-    // email: '',
-    // name: '',
-    // phone: '',
+    email: '',
+    name: '',
+    phone: '',
     // connections: [],
   };
 
   const store = {
+    // Data Loading State
     _pending: observable.box<boolean>(true),
     get pending() {
       return store._pending.get();
     },
     setPending(value: boolean) {
-      store._pending.set(value);
+      runInAction(() => store._pending.set(value));
     },
     _loading: observable.box<boolean>(false),
     get loading() {
       return store._loading.get();
     },
     setLoading(value: boolean) {
-      store._loading.set(value);
+      runInAction(() => store._loading.set(value));
     },
     _loaded: observable.box<boolean>(false),
     get loaded() {
       return store._loaded.get();
     },
     setLoaded(value: boolean) {
-      store._loaded.set(value);
+      runInAction(() => store._loaded.set(value));
     },
     _error: observable.box<null | string>(null),
     get error() {
       return store._error.get();
     },
     setError(value: null | string) {
-      store._error.set(value);
+      runInAction(() => store._error.set(value));
     },
 
-    _token: observable.box<string>(initUserData.token),
+    // Action Loading State
+    _actionLoading: observable.box<boolean>(false),
+    get actionLoading() {
+      return store._actionLoading.get();
+    },
+    setActionLoading(value: boolean) {
+      runInAction(() => store._loading.set(value));
+    },
+    _actionError: observable.box<null | string>(null),
+    get actionError() {
+      return store._actionError.get();
+    },
+    setActionError(value: null | string) {
+      runInAction(() => store._actionError.set(value));
+    },
+
+    // Auth State
+    _userId: observable.box<string>(''),
+    get userId() {
+      return store._userId.get();
+    },
+    _token: observable.box<string>(''),
     get token() {
       return store._token.get();
     },
-    setToken(token: string) {
-      store._token.set(token);
+    setAuth(userId: string, token: string) {
+      runInAction(() => {
+        store._userId.set(userId);
+        store._token.set(token);
+      });
     },
+
+    // UserData State
+    _email: observable.box<string>(initUserData.email),
+    get email() {
+      return store._email.get();
+    },
+    _name: observable.box<string>(initUserData.name),
+    get name() {
+      return store._name.get();
+    },
+    _phone: observable.box<string>(initUserData.phone),
+    get phone() {
+      return store._phone.get();
+    },
+
     async login(loginData: LoginData) {
       try {
         runInAction(() => {
           store.setPending(false);
           store.setLoading(true);
         });
-        const data = await fetchData<{ token: string }>('/users/login', {
+        const data = await fetchData<LoginReturnType>('/users/login', {
           body: loginData,
         });
+
+        await SecureStore.setItemAsync('userId', data.userId);
         await SecureStore.setItemAsync('token', data.token);
-        store._token.set(data.token);
+        runInAction(() => {
+          store._userId.set(data.userId);
+          store._token.set(data.token);
+        });
       } catch (error) {
         console.log(error);
         runInAction(() => {
@@ -106,11 +147,80 @@ export const createUserDataStore = (): UserDataStore => {
           store.setPending(false);
           store.setLoading(true);
         });
-        const data = await fetchData<{ token: string }>('/users/register', {
+        const data = await fetchData<LoginReturnType>('/users/register', {
           body: registerData,
         });
+
+        await SecureStore.setItemAsync('userId', data.userId);
         await SecureStore.setItemAsync('token', data.token);
-        store._token.set(data.token);
+        runInAction(() => {
+          store._userId.set(data.userId);
+          store._token.set(data.token);
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => {
+          if (error instanceof Error) {
+            store.setError(error.message);
+          }
+          store.setLoaded(false);
+        });
+      } finally {
+        store.setLoading(false);
+      }
+    },
+
+    async logout() {
+      try {
+        runInAction(() => {
+          store.setPending(false);
+          store.setLoading(true);
+        });
+
+        await SecureStore.deleteItemAsync('userId');
+        await SecureStore.deleteItemAsync('token');
+
+        runInAction(() => {
+          store._userId.set('');
+          store._token.set('');
+        });
+
+        await fetchData('/users/logout', {
+          method: 'POST',
+          token: store._token.get(),
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => {
+          if (error instanceof Error) {
+            store.setError(error.message);
+          }
+          store.setLoaded(false);
+        });
+      } finally {
+        store.setLoading(false);
+      }
+    },
+    async getUserData() {
+      try {
+        runInAction(() => {
+          store.setPending(false);
+          store.setLoading(true);
+        });
+        console.log('in');
+        
+        const data = await fetchData<GetUserReturnType>(
+          `/users/${store._userId.get()}`,
+          {
+            token: store._token.get(),
+          }
+        );
+
+        runInAction(() => {
+          store._email.set(data.userData.email);
+          store._name.set(data.userData.name);
+          store._phone.set(data.userData.phone);
+        });
       } catch (error) {
         console.log(error);
         runInAction(() => {
