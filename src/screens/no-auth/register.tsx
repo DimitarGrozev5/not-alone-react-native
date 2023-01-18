@@ -37,7 +37,7 @@ const Register: React.FC = () => {
     <AppLayout>
       <Card>
         <H2>Register a new account</H2>
-        <Spacer gap={16} />
+        <Spacer />
         <Controller
           control={control}
           name="email"
@@ -62,7 +62,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <Controller
           control={control}
@@ -88,7 +88,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <Controller
           control={control}
@@ -108,7 +108,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <Controller
           control={control}
@@ -128,7 +128,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <Controller
           control={control}
@@ -146,6 +146,7 @@ const Register: React.FC = () => {
           }) => (
             <UiTextInput
               label="Enter a password"
+              password
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -154,7 +155,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <Controller
           control={control}
@@ -172,6 +173,7 @@ const Register: React.FC = () => {
           }) => (
             <UiTextInput
               label="Repeat your password"
+              password
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
@@ -180,7 +182,7 @@ const Register: React.FC = () => {
             />
           )}
         />
-        <Spacer gap={16} />
+        <Spacer />
 
         <UiButton onPress={handleSubmit(submitHandler)}>
           Register your new Account

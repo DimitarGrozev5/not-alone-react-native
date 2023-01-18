@@ -5,6 +5,7 @@ import UiText from '../typography/generic-text';
 
 type Props = {
   label: string;
+  password?: boolean;
   value: string;
   onChangeText: (val: string) => void;
   onBlur?: () => void;
@@ -16,6 +17,7 @@ const UiTextInput: React.FC<Props> = ({
   label,
   value,
   onChangeText,
+  password = false,
   onBlur = () => {},
   error = false,
   helperText = '',
@@ -26,6 +28,7 @@ const UiTextInput: React.FC<Props> = ({
       <TextInput
         style={[styles.input, toggle(error, styles.errorInput)]}
         cursorColor={LightColorsLake.A900}
+        secureTextEntry={password}
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}

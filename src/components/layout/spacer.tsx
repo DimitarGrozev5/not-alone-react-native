@@ -4,7 +4,7 @@ type Props = {
   gap?: number;
 };
 
-const Spacer: React.FC<Props> = ({ gap = 8 }) => {
+const Spacer: React.FC<Props> = ({ gap = 16 }) => {
   return <View style={{ paddingTop: gap }} />;
 };
 
