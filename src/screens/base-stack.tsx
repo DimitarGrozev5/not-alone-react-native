@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { observer } from 'mobx-react-lite';
-import { useEffect } from 'react';
 import { useStore } from '../store/useStore';
 import {
   LightColorsForest,

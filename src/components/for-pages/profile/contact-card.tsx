@@ -18,7 +18,11 @@ const ContactCard: React.FC<Props> = ({ name, phone }) => {
       android_ripple={{ color: LightColorsForest.A100 }}
       onPress={callHandler}
     >
-      <H3>{name}</H3>
+      {name ? (
+        <H3>{name}</H3>
+      ) : (
+        <UiText>(Connect to user, to see his name)</UiText>
+      )}
       <UiText bold={false}>{phone}</UiText>
     </Pressable>
   );
