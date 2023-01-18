@@ -14,8 +14,6 @@ import { useStore } from '../../store/useStore';
 const NoAuthHome: React.FC = observer(() => {
   const randomTrip = useStore('randomTrip');
 
-  console.log(randomTrip.loaded);
-
   useEffect(() => {
     randomTrip.getRandomTrip();
   }, []);
@@ -74,9 +72,7 @@ const NoAuthHome: React.FC = observer(() => {
                 </H3>
               )}
               {randomTrip.tripStatus.status === 'FINISHED' && (
-                <H3 center={false}>
-                  The user has arrived
-                </H3>
+                <H3 center={false}>The user has arrived</H3>
               )}
             </StopsMonitor>
             <H3 variant="forest" center={false}>
