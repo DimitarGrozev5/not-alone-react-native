@@ -47,8 +47,8 @@ const NoAuthHome: React.FC = observer(() => {
         )}
         {randomTrip.loaded && (
           <>
-            <H2>{randomTrip.allActiveTrips} активни пътувания в момента</H2>
-            <H3 center={false}>Ето едно от тях:</H3>
+            <H2>{randomTrip.allActiveTrips} active trips</H2>
+            <H3 center={false}>Here is a random one:</H3>
 
             <StopsMonitor
               stops={randomTrip.stops}
@@ -57,27 +57,33 @@ const NoAuthHome: React.FC = observer(() => {
               {randomTrip.tripStatus.status === 'ONGOING' && (
                 <>
                   <H3 center={false}>
-                    Потребителят се очаква да пристигне до {timeLeft}
+                    The user is expected to get there in {timeLeft}
                   </H3>
                 </>
               )}
               {randomTrip.tripStatus.status === 'PAUSED' && (
                 <>
-                  <H3 center={false}>Потребителят е в почивка</H3>
+                  <H3 center={false}>The user has Paused the trip</H3>
                 </>
               )}
               {(randomTrip.tripStatus.status === 'LATE' ||
                 randomTrip.tripStatus.status === 'VERY_LATE') && (
                 <H3 center={false}>
-                  Потребителят закъснява с <UiText variant='forest'>{timeLeft}</UiText>.
+                  THe user is overdue{' '}
+                  <UiText variant="forest">{timeLeft}</UiText>.
                 </H3>
               )}
               {randomTrip.tripStatus.status === 'FINISHED' && (
                 <H3 center={false}>
-                  Потребителят стигна до крайната си дестинация
+                  The user has arrived
                 </H3>
               )}
             </StopsMonitor>
+            <H3 variant="forest" center={false}>
+              {randomTrip.watchers}{' '}
+              {randomTrip.watchers === 1 ? 'person is' : 'people are'} watching
+              him, making sure he gets there safe
+            </H3>
           </>
         )}
       </Card>

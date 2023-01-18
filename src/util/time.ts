@@ -25,9 +25,9 @@ export const timeLeft = (target: number): [number, string] => {
   const [, , m, h, d] = deconstructDuration(Math.abs(dt));
 
   const result = [];
-  d !== 0 && result.push(`${d} дни, `);
-  d !== h && d + h > 0 && result.push(`${h} часа и `);
-  result.push(`${m} минути`);
+  d !== 0 && result.push(`${d} days, `);
+  d !== h && d + h > 0 && result.push(`${h} hours and `);
+  result.push(`${m} minutes`);
 
   return [dt, result.join('')];
 };
