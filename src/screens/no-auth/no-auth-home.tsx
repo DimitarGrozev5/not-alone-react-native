@@ -67,8 +67,7 @@ const NoAuthHome: React.FC = observer(() => {
               {(randomTrip.tripStatus.status === 'LATE' ||
                 randomTrip.tripStatus.status === 'VERY_LATE') && (
                 <H3 center={false}>
-                  THe user is overdue{' '}
-                  <UiText variant="forest">{timeLeft}</UiText>.
+                  The user is <UiText variant="forest">{timeLeft}</UiText> late.
                 </H3>
               )}
               {randomTrip.tripStatus.status === 'FINISHED' && (

@@ -1,4 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../store/useStore';
 import {
   LightColorsForest,
   LightColorsLake,
@@ -12,8 +14,10 @@ import Register from './no-auth/register';
 
 const Stack = createNativeStackNavigator<BaseStackParamList>();
 
-const BaseStack = () => {
-  const isAuth = false;
+const BaseStack = observer(() => {
+  const token = useStore('userData').token;
+
+  const isAuth = !!token;
   return (
     <Stack.Navigator
       screenOptions={{
@@ -45,6 +49,6 @@ const BaseStack = () => {
       )}
     </Stack.Navigator>
   );
-};
+});
 
 export default BaseStack;

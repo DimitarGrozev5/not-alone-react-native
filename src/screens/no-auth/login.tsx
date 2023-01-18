@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { Text } from 'react-native';
 import UiButton from '../../components/inputs/ui-button';
@@ -7,10 +8,17 @@ import Card from '../../components/layout/card';
 import Spacer from '../../components/layout/spacer';
 import UiText from '../../components/typography/generic-text';
 import H2 from '../../components/typography/h2';
+import { useStore } from '../../store/useStore';
 
-const Login: React.FC = () => {
+const Login: React.FC = observer(() => {
+  const userDataStore = useStore('userData');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const submitHandler = () => {
+    userDataStore.login({ email, password });
+  };
 
   return (
     <AppLayout>
@@ -29,10 +37,10 @@ const Login: React.FC = () => {
         />
         <Spacer />
 
-        <UiButton onPress={() => {}}>Login</UiButton>
+        <UiButton onPress={submitHandler}>Login</UiButton>
       </Card>
     </AppLayout>
   );
-};
+});
 
 export default Login;

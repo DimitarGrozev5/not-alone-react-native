@@ -1,5 +1,6 @@
 import React, { createContext } from 'react';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SecureStore from 'expo-secure-store';
 import { autorun } from 'mobx';
 import { useLocalObservable } from 'mobx-react-lite';
 
@@ -14,19 +15,10 @@ export function StoreProvider({
   const store = useLocalObservable(createStore);
 
   // Get data from local storage
-  // (async () => {
-  //   const jsonValue = await AsyncStorage.getItem('db-data');
-  //   if (jsonValue) {
-  //     const db = JSON.parse(jsonValue) as DB;
-
-  //     store.db.activeSession.setStartedAt(db.activeSession.startedAt);
-  //     store.db.goals.setCurrentDailyGoal(db.goals.currentDailyGoal);
-  //     store.db.achieved.today.setAchieved(db.achieved.today.achieved);
-  //     store.db.achieved.today.setDate(db.achieved.today.date);
-  //     store.db.achieved.today.setGoal(db.achieved.today.goal);
-  //     store.db.achieved.setOverall(db.achieved.overall);
-  //   }
-  // })();
+  (async () => {
+    const token = await SecureStore.getItemAsync('token');
+    store.userData.setToken(token || '');
+  })();
 
   // Save store to local storage after every change
   // autorun(async () => {

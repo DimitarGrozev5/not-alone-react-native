@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useForm, Controller } from 'react-hook-form';
 
 import UiButton from '../../components/inputs/ui-button';
@@ -6,6 +7,7 @@ import AppLayout from '../../components/layout/app-layput';
 import Card from '../../components/layout/card';
 import Spacer from '../../components/layout/spacer';
 import H2 from '../../components/typography/h2';
+import { useStore } from '../../store/useStore';
 
 type RegisterFormData = {
   email: string;
@@ -16,7 +18,9 @@ type RegisterFormData = {
   repeatPassword: string;
 };
 
-const Register: React.FC = () => {
+const Register: React.FC = observer(() => {
+  const userDataStore = useStore('userData');
+
   const { control, handleSubmit, watch } = useForm<RegisterFormData>({
     mode: 'onTouched',
     defaultValues: {
@@ -29,8 +33,13 @@ const Register: React.FC = () => {
     },
   });
 
-  const submitHandler = (form: RegisterFormData) => {
-    console.log(form);
+  const submitHandler = (data: RegisterFormData) => {
+    userDataStore.register({
+      email: data.email,
+      name: data.name,
+      phone: data.phone,
+      password: data.password,
+    });
   };
 
   return (
@@ -190,6 +199,6 @@ const Register: React.FC = () => {
       </Card>
     </AppLayout>
   );
-};
+});
 
 export default Register;
