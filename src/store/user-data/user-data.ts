@@ -21,6 +21,8 @@ export interface Connection {
 }
 interface UserConnections {
   connections: Connection[];
+  inConReq: Connection[];
+  outConReq: Connection[];
 }
 
 interface UserData extends UserOverview, UserConnections {}
@@ -43,6 +45,8 @@ export const createUserDataStore = (): UserDataStore => {
     name: '',
     phone: '',
     connections: [],
+    inConReq: [],
+    outConReq: [],
   };
 
   const store = {
@@ -124,6 +128,14 @@ export const createUserDataStore = (): UserDataStore => {
     _connections: observable.box<Connection[]>(initUserData.connections),
     get connections() {
       return store._connections.get();
+    },
+    _inConReq: observable.box<Connection[]>(initUserData.inConReq),
+    get inConReq() {
+      return store._inConReq.get();
+    },
+    _outConReq: observable.box<Connection[]>(initUserData.outConReq),
+    get outConReq() {
+      return store._outConReq.get();
     },
 
     async login(loginData: LoginData) {
@@ -235,6 +247,10 @@ export const createUserDataStore = (): UserDataStore => {
           store._name.set(data.userData.name);
           store._phone.set(data.userData.phone);
           store._connections.set([...data.connections]);
+          store._inConReq.set([...data.inConReq]);
+          store._outConReq.set(
+            [...data.outConReq].map((c) => ({ ...c, name: '' }))
+          );
         });
       } catch (error) {
         console.log(error);

@@ -4,6 +4,7 @@ import { View, StyleSheet, Modal } from 'react-native';
 import { useStore } from '../../../store/useStore';
 import UiButton from '../../inputs/ui-button';
 import Card from '../../layout/card';
+import UiModal from '../../layout/UiModal';
 import H2 from '../../typography/h2';
 import ProfileConnections from './profile-connections';
 
@@ -60,14 +61,10 @@ const ProfileOverview: React.FC = observer(() => {
         </View>
       </View>
       <UiButton onPress={() => setShowContacts(true)}>View Contacts</UiButton>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showContacts}
-        onRequestClose={closeHandler}
-      >
+
+      <UiModal show={showContacts} closeHandler={closeHandler}>
         <ProfileConnections closeHandler={closeHandler} />
-      </Modal>
+      </UiModal>
     </Card>
   );
 });

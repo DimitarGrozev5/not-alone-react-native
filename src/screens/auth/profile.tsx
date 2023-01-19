@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ProfileConnectionRequests from '../../components/for-pages/profile/profile-connection-reqs';
 import ProfileOverview from '../../components/for-pages/profile/profile-overview';
 import UiButton from '../../components/inputs/ui-button';
 import AppLayout from '../../components/layout/app-layput';
@@ -15,6 +16,7 @@ const Profile: React.FC = () => {
   return (
     <AppLayout>
       <ProfileOverview />
+      <ProfileConnectionRequests />
       <Card>
         <UiButton onPress={logout}>Logout</UiButton>
       </Card>

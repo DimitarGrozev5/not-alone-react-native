@@ -19,7 +19,7 @@ interface GetUserReturnType {
     id: string;
     name: string;
     phone: string;
-  };
+  }[];
   outConReq: {
     id: string;
     phone: string;
