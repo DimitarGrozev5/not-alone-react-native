@@ -8,9 +8,14 @@ import H2 from '../../typography/h2';
 import ProfileConnections from './profile-connections';
 
 const ProfileOverview: React.FC = observer(() => {
-  const email = useStore('userData').email;
-  const name = useStore('userData').name;
-  const phone = useStore('userData').phone;
+  const userData = useStore('userData');
+  const email = userData.email;
+  const name = userData.name;
+  const phone = userData.phone;
+
+  const loading = userData.loading;
+  const loaded = userData.loaded;
+  const firstLoad = loading && !loaded;
 
   const [showContacts, setShowContacts] = useState(false);
   const closeHandler = () => setShowContacts(false);
@@ -25,7 +30,9 @@ const ProfileOverview: React.FC = observer(() => {
           </H2>
         </View>
         <View style={styles.dataRowSecond}>
-          <H2 bold={false}>{name}</H2>
+          <H2 fade={loading} bold={false}>
+            {firstLoad ? 'Loading...' : name}
+          </H2>
         </View>
       </View>
       <View style={styles.dataRow}>
@@ -35,7 +42,9 @@ const ProfileOverview: React.FC = observer(() => {
           </H2>
         </View>
         <View style={styles.dataRowSecond}>
-          <H2 bold={false}>{email}</H2>
+          <H2 fade={loading} bold={false}>
+            {firstLoad ? 'Loading...' : email}
+          </H2>
         </View>
       </View>
       <View style={styles.dataRow}>
@@ -45,7 +54,9 @@ const ProfileOverview: React.FC = observer(() => {
           </H2>
         </View>
         <View style={styles.dataRowSecond}>
-          <H2 bold={false}>{phone}</H2>
+          <H2 fade={loading} bold={false}>
+            {firstLoad ? 'Loading...' : phone}
+          </H2>
         </View>
       </View>
       <UiButton onPress={() => setShowContacts(true)}>View Contacts</UiButton>

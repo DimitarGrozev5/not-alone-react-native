@@ -5,17 +5,25 @@ import H2 from '../../typography/h2';
 import { Linking } from 'react-native';
 import { LightColorsForest } from '../../../styling/colors';
 import H3 from '../../typography/h3';
+import UiButton from '../../inputs/ui-button';
+import { useState } from 'react';
 
-type Props = Connection;
+type Props = Connection & {
+  addMode?: boolean;
+  addHandler?: () => void;
+};
 
-const ContactCard: React.FC<Props> = ({ name, phone }) => {
+const ContactCard: React.FC<Props> = ({ name, phone, addMode, addHandler }) => {
   const callHandler = () => {
-    Linking.openURL(`tel:${phone}`);
+    if (!addMode) Linking.openURL(`tel:${phone}`);
   };
+
+  const [confirm, setConfirm] = useState(false);
+
   return (
     <Pressable
       style={styles.cardContainer}
-      android_ripple={{ color: LightColorsForest.A100 }}
+      android_ripple={addMode ? {} : { color: LightColorsForest.A100 }}
       onPress={callHandler}
     >
       {name ? (
@@ -23,7 +31,24 @@ const ContactCard: React.FC<Props> = ({ name, phone }) => {
       ) : (
         <UiText>(Connect to user, to see his name)</UiText>
       )}
-      <UiText bold={false}>{phone}</UiText>
+      <View style={styles.addContainer}>
+        <UiText bold={false}>
+          {confirm ? 'Are you sure you want to add this user?' : phone}
+        </UiText>
+        {addMode && (
+          <View style={styles.addContainer}>
+            {!confirm && (
+              <UiButton onPress={() => setConfirm(true)}>Add</UiButton>
+            )}
+            {confirm && (
+              <>
+                <UiButton onPress={addHandler || (() => {})}>Yes</UiButton>
+                <UiButton onPress={() => setConfirm(false)}>No</UiButton>
+              </>
+            )}
+          </View>
+        )}
+      </View>
     </Pressable>
   );
 };
@@ -33,7 +58,10 @@ export default ContactCard;
 const styles = StyleSheet.create({
   cardContainer: {
     paddingVertical: 8,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
+  },
+  addContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

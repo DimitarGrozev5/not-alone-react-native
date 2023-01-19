@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextStyle } from 'react-native';
+import { alpha } from '../../styling/alpha';
 import {
   LightColorsForest,
   LightColorsLake,
@@ -11,6 +12,7 @@ type Props = {
   variant?: 'rock' | 'forest' | 'lake';
   center?: boolean;
   bold?: boolean;
+  fade?: boolean;
   style?: TextStyle | TextStyle[];
 };
 
@@ -20,6 +22,7 @@ const UiText: React.FC<Props> = ({
   variant = 'rock',
   style = {},
   bold = false,
+  fade = false,
 }) => {
   return (
     <Text
@@ -28,7 +31,8 @@ const UiText: React.FC<Props> = ({
         toggle(variant === 'forest', styles.forestColor),
         toggle(variant === 'lake', styles.lakeColor),
         toggle(center, styles.centered),
-        toggle(bold, styles.bold),
+        toggle(bold && !fade, styles.bold),
+        toggle(fade, styles.fade),
         style,
       ].flatMap((s) => s)}
     >
@@ -54,5 +58,8 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontWeight: 'bold',
+  },
+  fade: {
+    color: LightColorsRock.A200,
   },
 });

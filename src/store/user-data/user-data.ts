@@ -34,7 +34,7 @@ export interface UserDataStore
   register: (registerData: RegisterData) => void;
   logout: () => void;
   getUserData: () => void;
-  // getConnections: (connections: string[]) => void;
+  requestConnection: (toId: string) => void;
 }
 
 export const createUserDataStore = (): UserDataStore => {
@@ -244,6 +244,35 @@ export const createUserDataStore = (): UserDataStore => {
           store.setLoaded(false);
         });
       } finally {
+        store.setLoading(false);
+      }
+    },
+
+    async requestConnection(toId: string) {
+      try {
+        runInAction(() => {
+          store.setPending(false);
+          store.setLoading(true);
+        });
+
+        await fetchData<GetUserReturnType>('/requests', {
+          token: store._token.get(),
+          body: {
+            from: store._userId.get(),
+            to: toId,
+            type: 'CONNECTION',
+          },
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => {
+          if (error instanceof Error) {
+            store.setError(error.message);
+          }
+          store.setLoaded(false);
+        });
+      } finally {
+        store.getUserData();
         store.setLoading(false);
       }
     },

@@ -33,6 +33,12 @@ const ProfileConnections: React.FC<Props> = observer(({ closeHandler }) => {
     return connections;
   }, [connections, searchResult]);
 
+  const addConnection = (id: string) => () => {
+    setSearchQuery('');
+    closeHandler();
+    console.log(id);
+  };
+
   return (
     <View style={styles.root}>
       <Card flex={1} style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
@@ -57,7 +63,12 @@ const ProfileConnections: React.FC<Props> = observer(({ closeHandler }) => {
 
         <ScrollView style={{ flex: 1 }}>
           {displayConnections.map((c) => (
-            <ContactCard key={c.id} {...c} />
+            <ContactCard
+              key={c.id}
+              {...c}
+              addMode={!c.name}
+              addHandler={addConnection(c.id)}
+            />
           ))}
         </ScrollView>
       </Card>
