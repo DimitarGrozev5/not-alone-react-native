@@ -25,3 +25,5 @@ export interface AuthState {
   token: string;
   setAuth: (userId: string, token: string) => void;
 }
+
+// export type TripStatus =

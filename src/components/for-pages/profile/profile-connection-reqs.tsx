@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useStore } from '../../../store/useStore';
@@ -6,8 +7,10 @@ import Card from '../../layout/card';
 import UiModal from '../../layout/UiModal';
 import UiText from '../../typography/generic-text';
 import H2 from '../../typography/h2';
+import IncomingRequests from './profile-in-requests';
+import OutgoingRequests from './profile-out-requests';
 
-const ProfileConnectionRequests: React.FC = () => {
+const ProfileConnectionRequests: React.FC = observer(() => {
   const { inConReq, outConReq } = useStore('userData');
 
   const [showIn, setShowIn] = useState(false);
@@ -41,14 +44,14 @@ const ProfileConnectionRequests: React.FC = () => {
       </Card>
 
       <UiModal show={showIn} closeHandler={toggleIn}>
-        <UiText>in</UiText>
+        <IncomingRequests />
       </UiModal>
       <UiModal show={showOut} closeHandler={toggleOut}>
-        <UiText>Out</UiText>
+        <OutgoingRequests />
       </UiModal>
     </>
   );
-};
+});
 
 export default ProfileConnectionRequests;
 

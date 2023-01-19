@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ProfileConnectionRequests from '../../components/for-pages/profile/profile-connection-reqs';
+import ProfileConnections from '../../components/for-pages/profile/profile-connections';
 import ProfileOverview from '../../components/for-pages/profile/profile-overview';
 import UiButton from '../../components/inputs/ui-button';
 import AppLayout from '../../components/layout/app-layput';

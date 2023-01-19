@@ -37,6 +37,7 @@ export interface UserDataStore
   logout: () => void;
   getUserData: () => void;
   requestConnection: (toId: string) => void;
+  acceptConnection: (toId: string) => void;
 }
 
 export const createUserDataStore = (): UserDataStore => {
@@ -240,7 +241,6 @@ export const createUserDataStore = (): UserDataStore => {
             token: store._token.get(),
           }
         );
-        console.log(data.outConReq);
 
         runInAction(() => {
           store._email.set(data.userData.email);
@@ -279,6 +279,31 @@ export const createUserDataStore = (): UserDataStore => {
             to: toId,
             type: 'CONNECTION',
           },
+        });
+      } catch (error) {
+        console.log(error);
+        runInAction(() => {
+          if (error instanceof Error) {
+            store.setError(error.message);
+          }
+          store.setLoaded(false);
+        });
+      } finally {
+        store.getUserData();
+        store.setLoading(false);
+      }
+    },
+
+    async acceptConnection(id: string) {
+      try {
+        runInAction(() => {
+          store.setPending(false);
+          store.setLoading(true);
+        });
+
+        await fetchData<GetUserReturnType>(`/requests/${id}/accept`, {
+          token: store._token.get(),
+          method: 'POST',
         });
       } catch (error) {
         console.log(error);
