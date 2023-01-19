@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ProfileConnections: React.FC<Props> = observer(({ closeHandler }) => {
-  const connections = useStore('userData').connections;
+  const { connections, requestConnection } = useStore('userData');
 
   const [searchQuery, setSearchQuery] = useState('');
   const searchResult = useSearchForUser(searchQuery);
@@ -36,7 +36,7 @@ const ProfileConnections: React.FC<Props> = observer(({ closeHandler }) => {
   const addConnection = (id: string) => () => {
     setSearchQuery('');
     closeHandler();
-    console.log(id);
+    requestConnection(id);
   };
 
   return (

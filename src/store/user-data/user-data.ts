@@ -228,6 +228,7 @@ export const createUserDataStore = (): UserDataStore => {
             token: store._token.get(),
           }
         );
+        console.log(data.outConReq);
 
         runInAction(() => {
           store._email.set(data.userData.email);
