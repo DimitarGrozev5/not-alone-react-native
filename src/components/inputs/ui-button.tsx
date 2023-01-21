@@ -5,10 +5,12 @@ import {
   LightColorsLake,
   LightColorsRock,
 } from '../../styling/colors';
+import { toggle } from '../../styling/toggleStyle';
 
 type Props = {
   children: string;
   viewStyle?: ViewStyle;
+  pressableStyle?: ViewStyle;
 } & (
   | {
       href: string;
@@ -25,6 +27,7 @@ const UiButton: React.FC<Props> = ({
   href,
   onPress,
   viewStyle = {},
+  pressableStyle = {},
 }) => {
   const navigation = useNavigation();
 
@@ -42,7 +45,7 @@ const UiButton: React.FC<Props> = ({
   return (
     <View style={(styles.viewContainer, viewStyle)}>
       <Pressable
-        style={styles.pressable}
+        style={[styles.pressable, pressableStyle]}
         android_ripple={{
           color: LightColorsRock.A200,
         }}

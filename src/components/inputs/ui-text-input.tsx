@@ -12,6 +12,7 @@ type Props = {
   error?: boolean;
   helperText?: string;
   rows?: number;
+  placeholder?: string;
 };
 
 const UiTextInput: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const UiTextInput: React.FC<Props> = ({
   onBlur = () => {},
   error = false,
   helperText = '',
+  placeholder = '',
 }) => {
   return (
     <View>
@@ -38,6 +40,8 @@ const UiTextInput: React.FC<Props> = ({
         onBlur={onBlur}
         multiline={rows !== undefined}
         numberOfLines={rows ?? 1}
+        textAlignVertical={rows === undefined ? 'center' : 'top'}
+        placeholder={placeholder}
       />
       {!!helperText && (
         <UiText style={[styles.helperText, toggle(error, styles.errorText)]}>
