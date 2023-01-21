@@ -1,10 +1,4 @@
-import { TripOverview } from './store-types-base-types';
-
-export interface AllTripsReturn {
-  trips: TripOverview[];
-}
-
-interface Stop {
+export interface Stop {
   _id: string;
   stopModel: 'StopTextDescription';
   duration: number;
@@ -15,7 +9,7 @@ interface Stop {
   };
 }
 
-interface Watcher {
+export interface Watcher {
   _id: string;
   name: string;
   phone: string;
@@ -23,7 +17,7 @@ interface Watcher {
 
 type RequestType = 'ACCEPTED' | 'PENDING' | 'REJECTED';
 
-export interface GetTripReturn {
+export interface TripReturn {
   trip: {
     _id: string;
     name: string;

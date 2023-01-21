@@ -5,23 +5,8 @@ import {
   AuthState,
   DataLoadingState,
 } from '../slice-types';
+import { TripOverview, TripsData } from './store-types-base-types';
 import { AllTripsReturn } from './trips-return-types';
-
-interface TripStopTextDescriptionOverview {
-  stopModel: 'StopTextDescription';
-  duration: number;
-}
-
-export interface TripOverview {
-  _id: string;
-  name: string;
-  stops: TripStopTextDescriptionOverview[];
-  watchers: string[];
-}
-
-interface TripsData {
-  trips: TripOverview[];
-}
 
 export interface TripsDataStore
   extends TripsData,

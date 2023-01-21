@@ -25,7 +25,7 @@ const TripOverviewCard: React.FC<Props> = ({ tripData }) => {
 
   const navigateHandler = () => {
     // @ts-ignore
-    navigation.navigate('Profile');
+    navigation.navigate('OneTrip', { tripId: tripData._id });
   };
 
   return (
@@ -49,13 +49,20 @@ const TripOverviewCard: React.FC<Props> = ({ tripData }) => {
         </View>
         <H3>
           {watching && !watching.length && (
-            <UiText>Nobody is watching you yet</UiText>
+            <UiText>
+              <UiText variant="forest">Nobody</UiText> is watching you yet
+            </UiText>
           )}
           {watching && watching.length === 1 && (
-            <UiText>1 person is watching you</UiText>
+            <UiText>
+              <UiText variant="forest">1 person</UiText> is watching you
+            </UiText>
           )}
           {watching && watching.length > 1 && (
-            <UiText>{watching.length} people are watching you</UiText>
+            <UiText>
+              <UiText variant="forest">{watching.length} people</UiText> are
+              watching you
+            </UiText>
           )}
         </H3>
       </Pressable>

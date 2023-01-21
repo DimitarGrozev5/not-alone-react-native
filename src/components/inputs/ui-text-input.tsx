@@ -4,19 +4,21 @@ import { toggle } from '../../styling/toggleStyle';
 import UiText from '../typography/generic-text';
 
 type Props = {
-  label: string;
+  label?: string;
   password?: boolean;
   value: string;
   onChangeText: (val: string) => void;
   onBlur?: () => void;
   error?: boolean;
   helperText?: string;
+  rows?: number;
 };
 
 const UiTextInput: React.FC<Props> = ({
   label,
   value,
   onChangeText,
+  rows,
   password = false,
   onBlur = () => {},
   error = false,
@@ -24,7 +26,9 @@ const UiTextInput: React.FC<Props> = ({
 }) => {
   return (
     <View>
-      <UiText style={toggle(error, styles.errorText)}>{label}</UiText>
+      {!!label && (
+        <UiText style={toggle(error, styles.errorText)}>{label}</UiText>
+      )}
       <TextInput
         style={[styles.input, toggle(error, styles.errorInput)]}
         cursorColor={LightColorsLake.A900}
@@ -32,6 +36,8 @@ const UiTextInput: React.FC<Props> = ({
         value={value}
         onChangeText={onChangeText}
         onBlur={onBlur}
+        multiline={rows !== undefined}
+        numberOfLines={rows ?? 1}
       />
       {!!helperText && (
         <UiText style={[styles.helperText, toggle(error, styles.errorText)]}>

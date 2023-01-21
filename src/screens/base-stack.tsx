@@ -7,6 +7,7 @@ import {
   LightColorsRock,
 } from '../styling/colors';
 import HomeBottomNavigation from './auth/auth-bottom-navigation';
+import OneTrip from './auth/one-trip';
 import { BaseStackParamList } from './base-stack.types';
 import Login from './no-auth/login';
 import NoAuthHome from './no-auth/no-auth-home';
@@ -28,14 +29,17 @@ const BaseStack = observer(() => {
       }}
     >
       {isAuth ? (
-        <Stack.Screen
-          name="AuthHome"
-          component={HomeBottomNavigation}
-          options={{
-            title: 'Travel Safe',
-            headerShown: false,
-          }}
-        />
+        <>
+          <Stack.Screen
+            name="AuthHome"
+            component={HomeBottomNavigation}
+            options={{
+              title: 'Travel Safe',
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen name="OneTrip" component={OneTrip} options={{}} />
+        </>
       ) : (
         <>
           <Stack.Screen

@@ -5,6 +5,8 @@ export type BaseStackParamList = {
   NoAuthHome: undefined;
   Login: undefined;
   Register: undefined;
+
+  OneTrip: { tripId: string };
 };
 
 export type BaseStackProps = {
@@ -12,4 +14,5 @@ export type BaseStackProps = {
   NoAuthHome: NativeStackScreenProps<BaseStackParamList, 'NoAuthHome'>;
   Login: NativeStackScreenProps<BaseStackParamList, 'Login'>;
   Register: NativeStackScreenProps<BaseStackParamList, 'Register'>;
+  OneTrip: NativeStackScreenProps<BaseStackParamList, 'OneTrip'>;
 };

@@ -7,6 +7,7 @@ type Props = {
   variant?: 'rock' | 'forest' | 'lake';
   style?: TextStyle;
   fade?: boolean;
+  bold?: boolean;
 };
 
 const H3: React.FC<Props> = ({
@@ -15,11 +16,12 @@ const H3: React.FC<Props> = ({
   variant = 'rock',
   style = {},
   fade = false,
+  bold = true,
 }) => {
   return (
     <UiText
       center={center}
-      bold
+      bold={bold}
       fade={fade}
       variant={variant}
       style={[styles.h3, style]}
