@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { View } from 'react-native';
+import ScrollableSelect from '../../../inputs/scrollable-select';
 import UiButton from '../../../inputs/ui-button';
 import Spacer from '../../../layout/spacer';
 import TripInput from './trip-input';
@@ -25,6 +27,8 @@ const TripStopText: React.FC<Props> = ({
   onDurationChange,
   onDelete,
 }) => {
+  const [select, setSelect] = useState('0');
+  const vals = ['0', '1', '2', '3', '4', '5'];
   return (
     <>
       <Spacer divider />
@@ -40,6 +44,11 @@ const TripStopText: React.FC<Props> = ({
         duration={duration}
         onChange={onDurationChange} 
       />*/}
+      <ScrollableSelect
+        selectedValue={select}
+        values={vals}
+        onChange={setSelect}
+      />
       <TripStopDescription
         mode={mode}
         label="Description:"
