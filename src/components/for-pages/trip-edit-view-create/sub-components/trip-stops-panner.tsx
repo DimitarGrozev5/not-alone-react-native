@@ -53,7 +53,7 @@ const TripStopsPlanner: React.FC<Props> = observer(({ mode }) => {
         </ScrollView>
       )}
       {mode !== 'view' && (
-        <UiButton onPress={appendStop}>Добави спирка</UiButton>
+        <UiButton onPress={appendStop}>Add stop</UiButton>
       )}
     </>
   );

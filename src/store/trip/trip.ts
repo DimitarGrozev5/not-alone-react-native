@@ -186,7 +186,6 @@ export const createTripDataStore = (): TripDataStore => {
       if (stopIndex < 0) {
         return;
       }
-      console.log(name, description);
 
       runInAction(() =>
         store._stops.set([
