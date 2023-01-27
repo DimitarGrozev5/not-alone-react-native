@@ -6,10 +6,13 @@ import {
   Text,
   Pressable,
   NativeTouchEvent,
+  ScrollView,
 } from 'react-native';
 import { alpha } from '../../styling/alpha';
 import { LightColorsLake } from '../../styling/colors';
 import { animateState } from '../../util/animate-state';
+import Spacer from '../layout/spacer';
+import UiText from '../typography/generic-text';
 
 type Props = {
   selectedValue: string;
@@ -140,25 +143,48 @@ const ScrollableSelect: React.FC<Props> = ({
     setTouchStart(null);
   };
 
+  const [scrollViewRef, setScrollViewRef] = useState<ScrollView | null>(null);
+
   return (
-    <Pressable
-      style={[styles.container]}
-      onTouchStart={touchStartHandler}
-      onTouchMove={touchMoveHandler}
-      onTouchEnd={touchEndHandler}
-    >
-      <View style={[styles.mask, styles.alphaMask, { top: 0 }]}></View>
-      <View style={[styles.mask, { top: 50 }]}></View>
-      <View style={[styles.mask, styles.alphaMask, { top: 100 }]}></View>
-      {[...values.slice(-2), ...values, ...values.slice(0, 2)].map((v, i) => (
-        <Floater
-          key={i}
-          currentIndex={i}
-          value={v}
-          scrollOffset={scrollOffset}
-        />
-      ))}
-    </Pressable>
+  //   <ScrollView
+  //     style={styles.scrollViewContainer}
+  //     ref={(ref) => setScrollViewRef(ref)}
+  //     nestedScrollEnabled={true}
+  //     onScroll={(_) => scrollViewRef?.scrollTo(0)}
+  //   >
+      <Pressable
+        style={[styles.container]}
+        onTouchStart={touchStartHandler}
+        onTouchMove={touchMoveHandler}
+        onTouchEnd={touchEndHandler}
+      >
+        <View style={[styles.mask, styles.alphaMask, { top: 0 }]}></View>
+        <View style={[styles.mask, { top: 50 }]}></View>
+        <View style={[styles.mask, styles.alphaMask, { top: 100 }]}></View>
+        {[...values.slice(-2), ...values, ...values.slice(0, 2)].map((v, i) => (
+          <Floater
+            key={i}
+            currentIndex={i}
+            value={v}
+            scrollOffset={scrollOffset}
+          />
+        ))}
+      </Pressable>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    //   <UiText>fdfdfd</UiText>
+    // </ScrollView>
   );
 };
 
@@ -207,7 +233,18 @@ const Floater = React.memo(FloaterComponent);
 export default ScrollableSelect;
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    height: 150,
+    zIndex: 3,
+    backgroundColor: 'red',
+  },
   container: {
+    // position: 'absolute',
+    // left: 0,
+    // right: 0,
+    // top: 0,
+    // bottom: 0,
+
     borderWidth: 1,
     borderColor: LightColorsLake.A500,
     borderRadius: 4,

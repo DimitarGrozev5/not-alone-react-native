@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import DurationPicker from '../../../inputs/duration-picker';
 import ScrollableSelect from '../../../inputs/scrollable-select';
 import UiButton from '../../../inputs/ui-button';
 import Spacer from '../../../layout/spacer';
+import UiText from '../../../typography/generic-text';
 import TripInput from './trip-input';
 import TripStopDescription from './trip-stop-description';
 
@@ -31,6 +32,18 @@ const TripStopText: React.FC<Props> = ({
   return (
     <>
       <Spacer divider />
+      {/* <ScrollView
+        style={{ height: 150 }}
+        ref={(r) => setRef(r)}
+        nestedScrollEnabled={true}
+        onScroll={(_) => ref?.scrollTo(0)}
+      >
+        {Array(20)
+          .fill('')
+          .map((_, i) => (
+            <Spacer key={i} />
+          ))}
+      </ScrollView> */}
       <TripInput
         mode={mode}
         label="Stop:"
