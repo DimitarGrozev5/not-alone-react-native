@@ -8,11 +8,11 @@ import Card from '../../components/layout/card';
 import { useStore } from '../../store/useStore';
 
 const Profile: React.FC = () => {
-  const getUserStore = useStore('userData').getUserData;
+  const getUserData = useStore('userData').getUserData;
   const logout = useStore('userData').logout;
 
   useEffect(() => {
-    getUserStore();
+    getUserData();
   }, []);
   return (
     <AppLayout>
